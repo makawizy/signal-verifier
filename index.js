@@ -3,11 +3,11 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import router from './routes/login.js';
-import dotenv from 'dotenv';
+//import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 
 
-dotenv.config();
+//dotenv.config();
 const app = express();
 
 app.use(cookieParser());
@@ -24,8 +24,10 @@ app.get('/', (req, res) =>{
 const CONNECTION_URL = process.env.LOCALHOST_CONNECTION_URL;
 const PORT = process.env.PORT || 5000;
 console.log(CONNECTION_URL);
+
 mongoose.connect(CONNECTION_URL, {useNewUrlParser:true,useUnifiedTopology:true })
 .then(() => app.listen(PORT, () => console.log(`Server running port : ${PORT}`)))
-.catch((err) =>console.log(err.message));
+.catch((err) =>console.log(err));
+
 
 //mongoose.set(useFindAndModify, false);

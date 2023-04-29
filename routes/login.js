@@ -3,6 +3,6 @@ import {signIn} from '../controllers/login.js';
 
 const ROUTER = express.Router();
 
-ROUTER.get('/',signIn);
+ROUTER.post('/',signIn);
 
 export default ROUTER;

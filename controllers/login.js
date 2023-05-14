@@ -13,7 +13,9 @@ export const signIn = async (req, res, next) => {
         if(!isPasswordCorrect) return next(createError(400,"Wrong Login Incredentials!"));
         const {password, ...otherDetails} = user._doc;
         console.log("successfully logged in");
-     res.status(200).json({...otherDetails});
+     res
+     .status(200)
+     .json({...otherDetails});
     } catch (error) {
         next(createError(500, error.message));
     }

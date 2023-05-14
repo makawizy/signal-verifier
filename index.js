@@ -2,7 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import router from './routes/login.js';
+import login_router from './routes/login.js';
+import register_router from './routes/register.js';
 //import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 
@@ -14,7 +15,8 @@ app.use(cookieParser());
 app.use(bodyParser.json({limit: "30mb", extended:true}));
 app.use(bodyParser.urlencoded({limit: "30mb", extended:true}));
 app.use(cors());
-app.use('/login',router);
+app.use('/login',login_router);
+app.use('/register', register_router)
 
 app.get('/', (req, res) =>{
     res.send("Welcome To Signal Verifier API Homepage");

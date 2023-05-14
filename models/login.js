@@ -10,4 +10,4 @@ const userSchema = mongoose.Schema({
     
 });
 
-export default mongoose.model('Login', userSchema);;
+export default mongoose.model('Login', userSchema);

@@ -27,8 +27,7 @@ export const register = async (req, res, next) => {
         } catch (error) {
             next(createError(500, error.message));
         }
-        console.log("registration success");
-     res.status(200).json({...otherDetails});
+        
     } catch (error) {
         next(createError(500, error.message));
     }

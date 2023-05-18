@@ -11,6 +11,7 @@ export const profile = async (req, res, next) => {
         if(!user) return next(createError(404, `CANNOT FIND USER : ${loginEmail}`));
         const {password, ...otherDetails} = user._doc;
         console.log("successfully fetched user");
+        console.log(otherDetails);
      res
      .status(200)
      .json({...otherDetails});

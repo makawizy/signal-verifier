@@ -8,13 +8,13 @@ export const culprits = async (req, res, next) => {
        const myCulprits = await Culprits.find({email: req.body.email});
        const loginEmail = req.body.email;
         console.log(loginEmail);
-        if(!myCulprits) return next(createError(404, `CANNOT FIND USER : ${loginEmail}`));
+        if(!myCulprits) return next(createError(404, `Empty culprits list : ${loginEmail}`));
         const {culpritsDetails} = myCulprits._doc;
         console.log("successfully fetched user");
         console.log(culpritsDetails);
      res
      .status(200)
-     .json({...culpritsDetails});
+     .json({culpritsDetails});
     } catch (error) {
         next(createError(500, error.message));
     }

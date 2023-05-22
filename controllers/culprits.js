@@ -9,7 +9,7 @@ export const culprits = async (req, res, next) => {
        const loginEmail = req.body.email;
         console.log(loginEmail);
         if(!myCulprits) return next(createError(404, `Empty culprits list : ${loginEmail}`));
-        const {culpritsDetails} = myCulprits._doc;
+        const culpritsDetails = myCulprits._doc;
         console.log("successfully fetched user");
         //console.log(culpritsDetails);
      res

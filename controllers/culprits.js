@@ -11,7 +11,7 @@ export const culprits = async (req, res, next) => {
         if(!myCulprits) return next(createError(404, `Empty culprits list : ${loginEmail}`));
         const {culpritsDetails} = myCulprits._doc;
         console.log("successfully fetched user");
-        console.log(culpritsDetails);
+        //console.log(culpritsDetails);
      res
      .status(200)
      .json({culpritsDetails});

@@ -22,9 +22,7 @@ export const add_culprits = async (req, res, next) => {
         
 
     try {
-        const registerEmail = req.body.culpritArmyNumber;
-        console.log(registerEmail);
-
+ 
                     const addCulprits = new Culprits({
                 army_number: req.body.culpritArmyNumber,
                 surname: req.body.culpritSurname,

@@ -1,5 +1,5 @@
 import express from 'express';
-import {culprits} from '../controllers/culprits.js';
+import { culprits, add_culprits} from '../controllers/culprits.js';
 
 const ROUTER = express.Router();
 

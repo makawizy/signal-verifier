@@ -18,11 +18,12 @@ export const culprits = async (req, res, next) => {
 
 
 export const add_culprits = async (req, res, next) => {
-    try {
+
         
-        const registerEmail = req.body.email;
+
+    try {
+        const registerEmail = req.body.culpritArmyNumber;
         console.log(registerEmail);
-                try {
 
                     const addCulprits = new Culprits({
                 army_number: req.body.culpritArmyNumber,
@@ -35,14 +36,13 @@ export const add_culprits = async (req, res, next) => {
                 email: req.body.email,
 
             });
-            await addCulprits.save();
+        await addCulprits.save();
+        console.log(culpritArmyNumber);
             
             res.status(200).send("SUCCESSFUL");
         } catch (error) {
             next(createError(500, error.message));
         }
 
-    } catch (error) {
-        next(createError(500, error.message));
-    }
+   
 };

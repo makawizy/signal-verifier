@@ -37,7 +37,7 @@ export const add_culprits = async (req, res, next) => {
 
             });
         await addCulprits.save();
-        console.log(culpritArmyNumber);
+        console.log(army_number);
             
             res.status(200).send("SUCCESSFUL");
         } catch (error) {

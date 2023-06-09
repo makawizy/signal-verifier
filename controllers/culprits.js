@@ -22,9 +22,7 @@ export const add_culprits = async (req, res, next) => {
         
         const registerEmail = req.body.email;
         console.log(registerEmail);
-        if (User) return next(createError(404, `Email already exist : ${registerEmail}`));
-
-        try {
+                try {
 
             const addCulprits = new Culprits({
                 army_number: req.body.culpritArmyNumber,

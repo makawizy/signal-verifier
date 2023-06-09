@@ -34,9 +34,7 @@ export const add_culprits = async (req, res, next) => {
                 email: req.body.email,
 
             });
-        await addCulprits.save();
-        console.log(army_number);
-            
+        await addCulprits.save();          
             res.status(200).send("SUCCESSFUL");
         } catch (error) {
             next(createError(500, error.message));

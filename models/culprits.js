@@ -4,7 +4,6 @@ const culpritsSchema = mongoose.Schema({
     othername: { type: String, required: true},
     middlename: {type: String},
     email: { type: String, required: true},
-    phone: { type: String},
     profileImage: String,
     createdAt: {
         type: Date,

@@ -10,8 +10,10 @@ export const culprits = async (req, res, next) => {
         if(!myCulprits) return next(createError(404, `Empty culprits list : ${loginEmail}`));
      res
      .status(200)
-     .json({myCulprits});
+            .json({ myCulprits });
+
     } catch (error) {
+        console.log(error.message)
         next(createError(500, error.message));
     }
 };

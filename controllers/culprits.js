@@ -28,7 +28,7 @@ export const add_culprits = async (req, res, next) => {
                 surname: req.body.culpritSurname,
                 othername: req.body.culpritOthername,
                 middlename: req.body.culpritMiddlename,
-                //profileImage: req.body.culpritImage,
+                profileImage: req.body.culpritImage,
                 offence: req.body.culpritOffence,
                 createdAt: new Date(req.body.selectedDate),
                 email: req.body.email,

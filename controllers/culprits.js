@@ -8,7 +8,8 @@ export const culprits = async (req, res, next) => {
        const myCulprits = await Culprits.find({email: req.body.email});
        const loginEmail = req.body.email;
         if(!myCulprits) return next(createError(404, `Empty culprits list : ${loginEmail}`));
-     res
+        console.log(myCulprits)
+        res
      .status(200)
             .json({ myCulprits });
 

@@ -15,7 +15,7 @@ const app = express();
 
 app.use(cookieParser());
 app.use(bodyParser.json({limit: "30mb", extended:true}));
-app.use(bodyParser.urlencoded({limit: "30mb", extended:true}));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true, parameterLimit: 50000,}));
 app.use(cors());
 app.use('/login',login_router);
 app.use('/register', register_router)

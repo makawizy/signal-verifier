@@ -7,7 +7,8 @@ const culpritsSchema = mongoose.Schema({
     profileImage: String,
     army_number: { type: String, required: true },
     offence: String,
-    createdAt: {
+    status: { type: Boolean, default:false }
+,    createdAt: {
         type: Date,
         default: new Date()
     },

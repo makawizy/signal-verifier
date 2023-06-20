@@ -9,8 +9,6 @@ import culprits_router from './routes/culprits.js';
 import ps_router from './routes/ps.js';
 //import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-
-
 //dotenv.config();
 const app = express();
 

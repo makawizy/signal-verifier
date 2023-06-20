@@ -14,7 +14,7 @@ export const create_ps = async (req, res, next) => {
             email: req.body.email,
         });
         await createPS.save();
-        res.status(200).json("SUCCESSFUL");
+        res.status(200).send("SUCCESSFUL");
     } catch (error) {
         next(createError(500, error.message));
     }

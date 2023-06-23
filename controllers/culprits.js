@@ -38,7 +38,7 @@ export const add_culprits = async (req, res, next) => {
 
             });
         await addCulprits.save();          
-            res.status(200).send("SUCCESSFUL");
+        res.status(200).json({ response: "SUCCESSFUL" });
         } catch (error) {
             next(createError(500, error.message));
         }

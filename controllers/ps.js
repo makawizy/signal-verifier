@@ -21,3 +21,19 @@ export const create_ps = async (req, res, next) => {
 
 
 };
+
+export const get_ps = async (req, res, next) => {
+
+    try {
+        const myPS = await PS.find({ email: req.body.email });
+        const loginEmail = req.body.email;
+        if (!myPS) return next(createError(404, `Empty List For : ${loginEmail}`));
+        console.log(myPS)
+        res
+            .status(200)
+            .json({ myPS });
+    } catch (error) {
+        next(createError(500, error.message));
+    }
+
+};

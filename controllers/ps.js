@@ -37,3 +37,15 @@ export const get_ps = async (req, res, next) => {
     }
 
 };
+
+export const update_ps = async (req, res, next) => {
+    try {
+        const {id : _id} = req.params;
+        const ps_details = req.body;
+        if(!mongoose.Types.ObjectId.isValid(id) ) return res.status(404).json({response:"No post with such id"});
+        const updatedPS = await PS.findByIdAndUpdate(id, {...ps_details, _id}, {new: true});
+        res.json(updatedPS);
+    } catch (error) {
+        next(createError(500, error.message));
+    }
+};

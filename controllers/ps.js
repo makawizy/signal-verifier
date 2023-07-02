@@ -49,3 +49,20 @@ export const update_ps = async (req, res, next) => {
         next(createError(500, error.message));
     }
 };
+export const take_ps = async (req, res, next) => {
+    try {
+        const rec = [
+            { "id_att": "1", "status": false },
+            { "id_att": "2", "status": true },
+            { "id_att": "3", "status": true },
+            { "id_att": "4", "status": false },
+            { "id_att": "5", "status": true },
+            { "id_att": "6", "status": true },
+        ];
+        const { id: _id } = req.params;
+        res.json(rec);
+
+    } catch (error) {
+        next(createError(500, error.message));
+    }
+};

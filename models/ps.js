@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 const take_ps = mongoose.Schema({
     id: { type: String },
     ps_user_id: { type: String },
-    time: { type: time },
+    time: { type: Date },
     date: { type: Date },
     status: { type: Boolean },
 });

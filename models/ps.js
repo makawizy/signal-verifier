@@ -1,4 +1,11 @@
 import mongoose from 'mongoose';
+const take_ps = mongoose.Schema({
+    id: { type: String },
+    ps_user_id: { type: String },
+    time: { type: time },
+    date: { type: Date },
+    status: { type: Boolean },
+});
 const psSchema = mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
@@ -9,6 +16,7 @@ const psSchema = mongoose.Schema({
         default: new Date()
     },
     id: { type: String },
+    take_ps: [take_ps],
 
 });
 

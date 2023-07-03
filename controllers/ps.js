@@ -52,16 +52,14 @@ export const update_ps = async (req, res, next) => {
 
 export const take_ps = async (req, res, next) => {
     try {
-        const rec = [
-            { "id_att": "1", "status": false },
-            { "id_att": "2", "status": true },
-            { "id_att": "3", "status": true },
-            { "id_att": "4", "status": false },
-            { "id_att": "5", "status": true },
-            { "id_att": "6", "status": true },
-        ];
+        
         const { id: _id } = req.params;
-        res.json(rec);
+        const insertPS = req.body;
+        const result = await PS.updateOne(
+            { _id }, // Replace with the appropriate document identifier
+            { $set: { take_ps: jsonArray } } // Replace 'arrayField' with the name of your array field
+        );
+        res.json(result);
 
     } catch (error) {
         next(createError(500, error.message));

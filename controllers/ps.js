@@ -62,7 +62,7 @@ export const take_ps = async (req, res, next) => {
             { _id }, // Replace with the appropriate document identifier
             { $set: { take_ps: jsonArray } } // Replace 'arrayField' with the name of your array field
         );
-        res..status(200).json(result);
+        res.status(200).json(result);
 
     } catch (error) {
         next(createError(500, error.message));

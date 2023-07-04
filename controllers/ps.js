@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import PS from '../models/ps.js';
+import mongoose from 'mongoose';
 import { createError } from '../util/error.js';
 
 export const create_ps = async (req, res, next) => {

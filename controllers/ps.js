@@ -47,7 +47,7 @@ export const update_ps = async (req, res, next) => {
         if(!mongoose.Types.ObjectId.isValid(id) ) return res.status(404).json({response:"No post with such id"});
         const updatedPS = await PS.findByIdAndUpdate(id, {...ps_details, _id}, {new: true});
         console.log(updatedPS)
-        res.status(200).json(updatedPS);
+        res.status(200).json({ updatedPS: updatedPS });
     } catch (error) {
         next(createError(error.code, error.message));
     }

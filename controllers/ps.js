@@ -47,7 +47,7 @@ export const update_ps = async (req, res, next) => {
         if(!mongoose.Types.ObjectId.isValid(id) ) return res.status(404).json({response:"No post with such id"});
         const updatedPS = await PS.findByIdAndUpdate(id, {...ps_details, _id}, {new: true});
         console.log(updatedPS)
-        res.json(updatedPS);
+        res.status(200).json(updatedPS);
     } catch (error) {
         next(createError(error.code, error.message));
     }
@@ -62,7 +62,7 @@ export const take_ps = async (req, res, next) => {
             { _id }, // Replace with the appropriate document identifier
             { $set: { take_ps: jsonArray } } // Replace 'arrayField' with the name of your array field
         );
-        res.json(result);
+        res..status(200).json(result);
 
     } catch (error) {
         next(createError(500, error.message));

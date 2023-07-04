@@ -60,7 +60,7 @@ export const take_ps = async (req, res, next) => {
         const insertPS = req.body;
         const result = await PS.updateOne(
             { _id }, // Replace with the appropriate document identifier
-            { $set: { take_ps: jsonArray } } // Replace 'arrayField' with the name of your array field
+            { $set: { take_ps: insertPS } } // Replace 'arrayField' with the name of your array field
         );
         res.status(200).json(result);
 

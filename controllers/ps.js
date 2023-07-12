@@ -73,7 +73,7 @@ export const insert_loadRecords = async (req, res, next) => {
     try {
         const { id: _id } = req.params;
         const record = req.body;
-        const ps = await PS.find({ _id });
+        const ps = await PS.findOne({ _id : _id});
         const records = record.filter(obj => !ps.records.some(existingObj => JSON.stringify(existingObj) === JSON.stringify(obj)));
 
         if (records.length > 0) {

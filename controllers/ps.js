@@ -72,12 +72,19 @@ export const take_ps = async (req, res, next) => {
 export const insert_loadRecords = async (req, res, next) => {
     try {
         const { id: _id } = req.params;
-        const records = req.body;
-        const loadRecords = await PS.updateOne({ _id },
-            {
-                $push: { records: records }
-            });
-        res.status(200).json(loadRecords)
+        const record = req.body;
+        //const myPS = await PS.find({ email: req.body.email });
+        const records = record.filter(obj => !ps.records.some(existingObj
+            => JSON.stringify(existingObj) === JSON.stringify(obj)));
+
+        if (records.length > 0) {
+            const loadRecords = await PS.updateOne({ _id },
+                {
+                    $push: { records: records }
+                });
+            res.status(200).json(loadRecords)
+        }
+        
     } catch (error) {
         next(createError(error.status, error.message));
     }

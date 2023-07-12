@@ -7,7 +7,6 @@ const take_ps = mongoose.Schema({
     status: { type: Boolean },
 });
 const records = mongoose.Schema({
-    id: { type: String },
     army_number: { type: String, required: true },
     rank: { type: String, required: true },
     surname: { type: String, required: true },

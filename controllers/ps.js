@@ -74,14 +74,13 @@ export const insert_loadRecords = async (req, res, next) => {
         const { id: _id } = req.params;
         const record = req.body;
         //const myPS = await PS.find({ email: req.body.email });
-        const records = record.filter(obj => !ps.records.some(existingObj
-            => JSON.stringify(existingObj) === JSON.stringify(obj)));
+        const records = record.filter(obj => !ps.records.some(existingObj => JSON.stringify(existingObj) === JSON.stringify(obj)));
 
         if (records.length > 0) {
             const loadRecords = await PS.updateOne({ _id },
-                {
-                    $push: { records: records }
-                });
+                
+                   { $push: { 'ps.records': { $each: records } } },
+                );
             res.status(200).json(loadRecords)
         }
         

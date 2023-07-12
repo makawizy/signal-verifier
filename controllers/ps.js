@@ -76,7 +76,7 @@ export const insert_loadRecords = async (req, res, next) => {
         const { id: _id } = req.params;
         const records = req.body;
 
-        const ps = await PS.find({ _id });
+        const ps = await PS.findById({ _id });
         const holdrecord = ps.records;
         console.log(ps)
         console.log(records)

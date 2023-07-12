@@ -81,6 +81,7 @@ export const insert_loadRecords = async (req, res, next) => {
         const filteredRecords = records.filter(newRecord => {
             return !holdrecord.some(existingRecord => existingRecord.army_number === newRecord.army_number);
         });
+        console.log(filteredRecords)
             const loadRecords = await PS.updateOne({ _id },
                 
                 { $push: { records: filteredRecords} },

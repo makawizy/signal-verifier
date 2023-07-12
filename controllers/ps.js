@@ -73,8 +73,8 @@ export const insert_loadRecords = async (req, res, next) => {
     try {
         const { id: _id } = req.params;
         const record = req.body;
-        //const myPS = await PS.find({ email: req.body.email });
-        const records = record.filter(obj => !ps.records.some(existingObj => JSON.stringify(existingObj) === JSON.stringify(obj)));
+        const myPS = await PS.find({ _id });
+        const records = record.filter(obj => !myPS.records.some(existingObj => JSON.stringify(existingObj) === JSON.stringify(obj)));
 
         if (records.length > 0) {
             const loadRecords = await PS.updateOne({ _id },

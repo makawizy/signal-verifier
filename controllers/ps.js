@@ -72,7 +72,7 @@ export const take_ps = async (req, res, next) => {
 export const insert_loadRecords = async (req, res, next) => {
     try {
 
-        
+
         const { id: _id } = req.params;
         const records = req.body;
 
@@ -82,15 +82,40 @@ export const insert_loadRecords = async (req, res, next) => {
         const filteredRecords = records.filter(newRecord => {
             return !holdrecord.some(existingRecord => existingRecord.army_number === newRecord.army_number);
         });
-       // console.log(filteredRecords)
-        
-            const loadRecords = await PS.updateOne({ _id },
-                
-                { $push: { records: filteredRecords} },
-                );
-            res.status(200).json(loadRecords)
+        // console.log(filteredRecords)
 
-        
+        const loadRecords = await PS.updateOne({ _id },
+
+            { $push: { records: filteredRecords } },
+        );
+        res.status(200).json(loadRecords)
+
+
+    } catch (error) {
+        next(createError(error.status, error.message));
+    }
+};
+
+export const insert_single_record = async (req, res, next){
+    try {
+
+
+        const { id: _id } = req.params;
+        const record = req.body;
+
+        const ps = await PS.findById({ _id });
+        const holdrecords = ps.records;
+        const exists = holdrecords.some(records => records.army_number === record.army_number);
+        if (exists) {
+            const singleRecords = await PS.updateOne({ _id },
+
+                { $push: { records: record } },
+            );
+            res.status(200).json({response : "Added"});
+        } else {
+            res.status(200).json({response : "ALready Exist"});
+        }
+
     } catch (error) {
         next(createError(error.status, error.message));
     }

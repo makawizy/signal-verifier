@@ -24,7 +24,7 @@ const psSchema = mongoose.Schema({
     },
     id: { type: String },
     take_ps: [take_ps],
-    records : [records],
+    records: { type: [records], default: []},
 
 });
 

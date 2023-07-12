@@ -75,7 +75,7 @@ export const insert_loadRecords = async (req, res, next) => {
         const record = req.body;
         const ps = await PS.findOne({ _id : _id});
         const records = ps.records.some(recordObj => recordObj.army_number === record.army_number) ;
-        console.log(records);
+        console.log(ps);
         if (records.length > 0) {
             const loadRecords = await PS.updateOne({ _id },
                 

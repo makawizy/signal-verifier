@@ -6,6 +6,13 @@ const take_ps = mongoose.Schema({
     date: { type: Date },
     status: { type: Boolean },
 });
+const records = mongoose.Schema({
+    id: { type: String },
+    army_number: { type: String, required: true },
+    rank: { type: String, required: true },
+    surname: { type: String, required: true },
+    othername: { type: String, required: true },
+});
 const psSchema = mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
@@ -17,6 +24,7 @@ const psSchema = mongoose.Schema({
     },
     id: { type: String },
     take_ps: [take_ps],
+    records : [records],
 
 });
 

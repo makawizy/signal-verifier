@@ -17,7 +17,7 @@ export const create_ps = async (req, res, next) => {
         await createPS.save();
         res.status(200).json({ response : "SUCCESSFUL"});
     } catch (error) {
-        next(createError(500, error.message));
+        next(createError(error.status, error.message));
     }
 
 
@@ -68,3 +68,17 @@ export const take_ps = async (req, res, next) => {
         next(createError(500, error.message));
     }
 };
+
+export const insert_loadRecords = async (req, res, next) => {
+    try {
+        const { id: _id } = req.params;
+        const records = req.body;
+        const loadRecords = await PS.updateOne({ _id },
+            {
+                $set: { records: records }
+            });
+        res.status(200).json(loadRecords)
+    } catch (error) {
+        next(createError(error.status, error.message));
+    }
+}

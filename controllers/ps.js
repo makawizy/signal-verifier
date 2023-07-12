@@ -71,12 +71,19 @@ export const take_ps = async (req, res, next) => {
 
 export const insert_loadRecords = async (req, res, next) => {
     try {
+
+        
         const { id: _id } = req.params;
         const records = req.body;
 
+        const ps = await PS.find({ _id });
+        const holdrecord = ps.records;
+        const filteredRecords = records.filter(newRecord => {
+            return !holdrecord.some(existingRecord => existingRecord.army_number === newRecord.army_number);
+        });
             const loadRecords = await PS.updateOne({ _id },
                 
-                { $push: {records : records} },
+                { $push: { records: filteredRecords} },
                 );
             res.status(200).json(loadRecords)
 

@@ -9,6 +9,6 @@ ROUTER.post('/get_ps', get_ps);
 ROUTER.patch('/update_ps/:id', update_ps);
 ROUTER.patch('/take_ps/:id', take_ps);
 ROUTER.patch('/insert_loadrecords/:id', insert_loadRecords);
-ROUTER.post('/insert_single_record/"id', insert_single_record);
+ROUTER.post('/insert_single_record/:id', insert_single_record);
 
 export default ROUTER;

@@ -76,7 +76,7 @@ export const insert_loadRecords = async (req, res, next) => {
 
             const loadRecords = await PS.updateOne({ _id },
                 
-                { $addToSet: { 'ps.records': records } },
+                { $addToSet: { 'records': records } },
                 );
             res.status(200).json(loadRecords)
 

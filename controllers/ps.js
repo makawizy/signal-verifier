@@ -106,7 +106,7 @@ export const insert_single_record = async (req, res, next) =>{
         const ps = await PS.findById({ _id });
         const holdrecords = ps.records;
         const exists = holdrecords.some(records => records.army_number === record.army_number);
-        if (exists) {
+        if (!exists) {
             const singleRecords = await PS.updateOne({ _id },
 
                 { $push: { records: record } },

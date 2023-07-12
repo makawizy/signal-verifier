@@ -96,7 +96,7 @@ export const insert_loadRecords = async (req, res, next) => {
     }
 };
 
-export const insert_single_record = async (req, res, next){
+export const insert_single_record = async (req, res, next) =>{
     try {
 
 

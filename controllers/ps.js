@@ -96,7 +96,7 @@ export const insert_loadRecords = async (req, res, next) => {
     }
 };
 
-export const insert_single_record = async (req, res, next) =>{
+export const insert_single_record = async (req, res, next) => {
     try {
 
 
@@ -111,12 +111,15 @@ export const insert_single_record = async (req, res, next) =>{
 
                 { $push: { records: record } },
             );
-            res.status(200).json({response : "Added"});
+            res.status(200).json({ response: "Added" });
         } else {
-            res.status(200).json({response : "ALready Exist"});
+            res.status(200).json({ response: "ALready Exist" });
         }
 
     } catch (error) {
         next(createError(error.status, error.message));
     }
-}
+};
+
+
+

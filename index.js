@@ -21,6 +21,7 @@ app.use('/register', register_router);
 app.use('/profile', profile_router);
 app.use('/culprits', culprits_router);
 app.use('/ps', ps_router);
+app.use('/reports', report_router);
 app.get('/', (req, res) =>{
     res.send("Welcome To Signal Verifier API Homepage");
 });

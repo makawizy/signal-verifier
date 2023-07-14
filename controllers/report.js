@@ -25,6 +25,7 @@ export const create_report = async (req, res, next) => {
             createdAt: today,
         });
         await createReport.save();
+        res.status(200).json(createReport);
     } catch (error) {
         next(createError(error.code, error.message));
     }

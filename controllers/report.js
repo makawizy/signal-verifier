@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import Report from '../models/report.js';
 import mongoose from 'mongoose';
 import { createError } from '../util/error.js';
+import  moment from 'moment';
 
 export const cancel_existing_report = async (req, res, next) => {
     try {
@@ -16,7 +17,7 @@ export const cancel_existing_report = async (req, res, next) => {
 
 export const create_report = async (req, res, next) => {
     try {
-        const moment = require('moment');
+        
         const today = moment().format('YYYY-MM-DD');
         const id = req.params;
         const createReport = new Report({

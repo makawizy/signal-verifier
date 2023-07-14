@@ -12,7 +12,7 @@ const report = mongoose.Schema({
 });
 const reportSchema = mongoose.Schema({
     id: { type: String },
-    ps_id: { type: String, required: true },
+    ps_id: { type: Object, required: true },
     venue: { type: String, required: true },
     reports: { type: [report], default: [] },
     status: { type: Boolean, default: false },

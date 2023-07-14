@@ -18,7 +18,7 @@ export const create_report = async (req, res, next) => {
     try {
         const moment = require('moment');
         const today = moment().format('YYYY-MM-DD');
-        const id = req.params;
+        const id = req.params.id;
         const createReport = new Report({
             venue: req.body.venue,
             PermissionStatus : id,

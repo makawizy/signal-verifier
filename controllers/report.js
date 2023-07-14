@@ -18,7 +18,7 @@ export const create_report = async (req, res, next) => {
     try {
         
         const today = new Date();
-        const id = req.params;
+        const id = req.params.id;
         const createReport = new Report({
             venue: req.body.venue,
             ps_id : id,

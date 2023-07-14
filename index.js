@@ -7,6 +7,7 @@ import register_router from './routes/register.js';
 import profile_router from './routes/get_profile.js';
 import culprits_router from './routes/culprits.js';
 import ps_router from './routes/ps.js';
+import report_router from './routes/report.js';
 //import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 //dotenv.config();

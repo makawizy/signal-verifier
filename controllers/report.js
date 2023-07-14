@@ -12,4 +12,20 @@ export const cancel_existing_report = async (req, res, next) => {
     } catch (error) {
         next(createError(error.code, error.message));
     }
-}
+};
+
+export const create_report = async (req, res, next) => {
+    try {
+        const moment = require('moment');
+        const today = moment().format('YYYY-MM-DD');
+        const id = req.params;
+        const createReport = new Report({
+            venue: req.body.venue,
+            PermissionStatus : id,
+            createdAt: today,
+        });
+        await createReport.save();
+    } catch (error) {
+        next(createError(error.code, error.message));
+    }
+};

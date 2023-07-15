@@ -123,7 +123,7 @@ export const insert_single_record = async (req, res, next) => {
 
 export const view_ps_record = async (req, res, next) => {
     try {
-        const { id: _id } = req.params.id;
+        const { id: _id } = req.params;
         const records = PS.findById({ _id });
         if (records) {
             res.status(200).json(records.records);

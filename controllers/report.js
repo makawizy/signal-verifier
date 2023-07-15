@@ -30,3 +30,12 @@ export const create_report = async (req, res, next) => {
         next(createError(error.code, error.message));
     }
 };
+
+export const take_report = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const report = req.body;
+    } catch (error) {
+        next(createError(error.code, error.message));
+    }
+};

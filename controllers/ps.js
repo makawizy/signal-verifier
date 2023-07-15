@@ -130,6 +130,7 @@ export const view_ps_record = async (req, res, next) => {
         } else {
             res.status(200).json({ });
         }
+        console.log(records)
     } catch (error) {
         next(createError(error.status, error.message));
     }

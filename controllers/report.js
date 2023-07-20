@@ -49,53 +49,26 @@ export const take_report = async (req, res, next) => {
 };
 
 export const getRecords = async (req, res, next) => {
+
     try {
         const { id } = req.params;
-        const result = await PS.aggregate([
-            {
-                $match: {
-                    _id: new mongoose.Types.ObjectId(id) // Match documents in "ps" collection where "_id" is equal to the specified id
-                }
-            },
-            {
-                $lookup: {
-                    from: 'reports',
-                    let: { psId: '$_id' },
-                    pipeline: [
-                        {
-                            $match: {
-                                $expr: {
-                                    $and: [
-                                        {
-                                            $eq: [
-                                                { $convert: { input: '$ps_id', to: 'objectId' } },
-                                                '$$psId'
-                                            ]
-                                        }, // Match "ps_id" in "reports" with "psId" from the outer collection
-                                        { status: false } // Filter documents where "status" in "reports" is false
-                                    ]
-                                }
-                            }
-                        }
-                    ],
-                    as: 'reportData' // New field to store the joined data (you can use any name)
-                }
-            },
-            {
-                $addFields: {
-                    reportData: {
-                        $filter: {
-                            input: '$reportData',
-                            as: 'report',
-                            cond: { $eq: ['$$report.status', false] } // Keep only the matching documents with status equal to false
-                        }
-                    }
-                }
+            // Find the "ps" document with the specified ID
+            const psDocument = await PS.findOne({ _id: mongoose.Types.ObjectId(id) });
+
+            if (!psDocument) {
+                return res.status(404).json({ error: 'Parade State not found' });
             }
-        ]);
 
+            // Find the "reports" documents with ps_id equal to the specified ID and status set to false
+            const reportData = await Reports.find({ ps_id: id, status: false }, { _id: 0, ps_id: 0 });
 
-        res.status(200).json(result);
+            // Add the "reportData" array to the "ps" document
+            //psDocument.reportData = reportData;
+        if (!reportData) {
+            return res.status(404).json({ error: 'No Report Created' });
+        }
+
+        res.status(200).json(psDocument);
 
     } catch (error) {
         next(createError(error.code, error.message));

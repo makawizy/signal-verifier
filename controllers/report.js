@@ -80,6 +80,17 @@ export const getRecords = async (req, res, next) => {
                     ],
                     as: 'reportData' // New field to store the joined data (you can use any name)
                 }
+            },
+            {
+                $addFields: {
+                    reportData: {
+                        $filter: {
+                            input: '$reportData',
+                            as: 'report',
+                            cond: { $eq: ['$$report.status', false] } // Keep only the matching documents with status equal to false
+                        }
+                    }
+                }
             }
         ]);
 

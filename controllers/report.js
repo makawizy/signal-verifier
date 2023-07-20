@@ -56,13 +56,13 @@ export const getRecords = async (req, res, next) => {
             {
                 $lookup: {
                     from: 'Report', // The collection name to join with (case-sensitive)
-                    let: { id: '$_id' },
+                    let: { ps_id: '$_id' },
                     pipeline: [
                         {
                             $match: {
                                 $expr: {
                                     $and: [
-                                        { $eq: ["6491a1cde9eb0004e79432ea", '6491a1cde9eb0004e79432ea'] }, // Match Product _id with Order productId
+                                        { $eq: ['$ps_id', '$$ps_id'] }, // Match Product _id with Order productId
                                         recordsFilter, // Apply the Product filter condition for price
                                     ],
                                 },

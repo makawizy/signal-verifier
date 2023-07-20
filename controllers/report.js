@@ -50,6 +50,7 @@ export const take_report = async (req, res, next) => {
 
 export const getRecords = async (req, res, next) => {
     try {
+        const { id } = req.params;
         const result = await PS.aggregate([
             {
                 $lookup: {
@@ -64,7 +65,7 @@ export const getRecords = async (req, res, next) => {
             },
             {
                 $match: {
-                    'reportData.status': false // Filter the result where "status" in "reports" is true
+                    'reportData.status': false, 'reportData.ps_id' : id, // Filter the result where "status" in "reports" is true
                 }
             },
             {

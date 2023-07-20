@@ -67,7 +67,7 @@ export const getRecords = async (req, res, next) => {
                                         $expr: {
                                             $and: [
                                                 { $eq: ['$ps_id', '$$psId'] }, // Match "ps_id" in "reports" with "psId" from the outer collection
-                                                { status: true } // Filter documents where "status" in "reports" is true
+                                                { status: false } // Filter documents where "status" in "reports" is true
                                             ]
                                         }
                                     }

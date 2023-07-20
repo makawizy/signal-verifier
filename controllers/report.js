@@ -33,8 +33,16 @@ export const create_report = async (req, res, next) => {
 
 export const take_report = async (req, res, next) => {
     try {
-        const id = req.params.id;
-        const report = req.body;
+
+        const { id } = req.params;
+        const filter = { ps_id: new ObjectId(id) };
+        const updateReport = req.body;
+        const result = await createReport.updateOne(
+            { filter }, // Replace with the appropriate document identifier
+            { $set: { reports: updateReport, status : true } } // Replace 'arrayField' with the name of your array field
+        );
+        res.status(200).json(result);
+
     } catch (error) {
         next(createError(error.code, error.message));
     }

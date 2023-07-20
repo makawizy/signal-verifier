@@ -81,7 +81,7 @@ export const getRecords = async (req, res, next) => {
            
        
 
-        res.status(200).json(result);
+        res.status(200).json(result.records);
 
     } catch (error) {
         next(createError(error.code, error.message));

@@ -79,7 +79,7 @@ export const getRecords = async (req, res, next) => {
                 ]);
 
            
-        console.log(result.reportData);
+        console.log(result[0]);
 
         res.status(200).json(result);
 

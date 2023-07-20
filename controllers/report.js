@@ -53,7 +53,7 @@ export const getRecords = async (req, res, next) => {
     try {
         const { id } = req.params;
             // Find the "ps" document with the specified ID
-            const psDocument = await PS.findOne({ _id: mongoose.Types.ObjectId(id) });
+            const psDocument = await PS.findOne({ _id: new mongoose.Types.ObjectId(id) });
 
             if (!psDocument) {
                 return res.status(404).json({ error: 'Parade State not found' });

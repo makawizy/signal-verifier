@@ -55,7 +55,7 @@ export const getRecords = async (req, res, next) => {
             {
                 $lookup: {
                     from: 'Reports',
-                    localField: 'id', // Field in "ps" collection to match
+                    localField: '_id', // Field in "ps" collection to match
                     foreignField: 'ps_id', // Field in "reports" collection to match
                     as: 'reportData' // New field to store the joined data (you can use any name)
                 }

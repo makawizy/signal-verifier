@@ -54,7 +54,7 @@ export const getRecords = async (req, res, next) => {
         const result = await PS.aggregate([
             {
                 $match: {
-                    _id: mongoose.Types.ObjectId(id) // Match documents in "ps" collection where "_id" is equal to the specified id
+                    _id: new mongoose.Types.ObjectId(id) // Match documents in "ps" collection where "_id" is equal to the specified id
                 }
             },
             {

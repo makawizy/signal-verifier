@@ -34,11 +34,10 @@ export const create_report = async (req, res, next) => {
 export const take_report = async (req, res, next) => {
     try {
 
-        const { id } = req.params;
-        const filter = { ps_id: id };
+        const { id: ps_id } = req.params;
         const updateReport = req.body;
         const result = await Report.updateOne(
-            { filter }, // Replace with the appropriate document identifier
+            { ps_id }, // Replace with the appropriate document identifier
             { $set: { reports: updateReport, status : true } } // Replace 'arrayField' with the name of your array field
         );
         res.status(200).json(result);

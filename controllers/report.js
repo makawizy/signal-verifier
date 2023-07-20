@@ -64,10 +64,10 @@ export const getRecords = async (req, res, next) => {
 
             // Add the "reportData" array to the "ps" document
             //psDocument.reportData = reportData;
-        if (!reportData) {
+        if (reportData.length === 0) {
             return res.status(404).json({ error: 'No Report Created' });
         }
-        res.status(200).json(reportData);
+        res.status(200).json(psDocument);
         //res.status(200).json(psDocument.records);
 
     } catch (error) {

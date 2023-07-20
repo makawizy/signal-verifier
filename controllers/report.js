@@ -35,7 +35,7 @@ export const take_report = async (req, res, next) => {
     try {
 
         const { id } = req.params;
-        const filter = { ps_id: new ObjectId(id) };
+        const filter = { ps_id: id };
         const updateReport = req.body;
         const result = await createReport.updateOne(
             { filter }, // Replace with the appropriate document identifier

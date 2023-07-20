@@ -62,6 +62,8 @@ export const getRecords = async (req, res, next) => {
                             $match: {
                                 $expr: {
                                     $and: [
+                                        { status: { $exists: true } }, // Check if the "status" field exists
+                                        { status: false }, // Check if the "status" field is false
                                         { $eq: ['$ps_id', '$$ps_id'] }, // Match Product _id with Order productId
                                         recordsFilter, // Apply the Product filter condition for price
                                     ],

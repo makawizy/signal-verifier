@@ -37,7 +37,7 @@ export const take_report = async (req, res, next) => {
         const { id } = req.params;
         const filter = { ps_id: id };
         const updateReport = req.body;
-        const result = await createReport.updateOne(
+        const result = await Report.updateOne(
             { filter }, // Replace with the appropriate document identifier
             { $set: { reports: updateReport, status : true } } // Replace 'arrayField' with the name of your array field
         );

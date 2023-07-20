@@ -54,7 +54,7 @@ export const getRecords = async (req, res, next) => {
         const result = await PS.aggregate([
             {
                 $lookup: {
-                    from: 'reports',
+                    from: 'Reports',
                     localField: 'id', // Field in "ps" collection to match
                     foreignField: 'ps_id', // Field in "reports" collection to match
                     as: 'reportData' // New field to store the joined data (you can use any name)

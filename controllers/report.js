@@ -64,7 +64,7 @@ export const getRecords = async (req, res, next) => {
             },
             {
                 $match: {
-                    'reportData.status': true // Filter the result where "status" in "reports" is true
+                    'reportData.status': false // Filter the result where "status" in "reports" is true
                 }
             },
             {

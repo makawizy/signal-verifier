@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import Report from '../models/report.js';
+import Reports from '../models/report.js';
 import PS from '../models/ps.js';
 import mongoose from 'mongoose';
 import { createError } from '../util/error.js';
@@ -65,7 +65,7 @@ export const getRecords = async (req, res, next) => {
             },
             {
                 $match: {
-                    'reportData.status': false, 'reportData.ps_id' : id, // Filter the result where "status" in "reports" is true
+                    'reportData.status': false,  // Filter the result where "status" in "reports" is true
                 }
             },
             {

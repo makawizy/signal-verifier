@@ -56,7 +56,7 @@ export const getRecords = async (req, res, next) => {
             {
                 $lookup: {
                     from: 'Report', // The collection name to join with (case-sensitive)
-                    let: { ps_id: '$_id', },
+                    let: { ps_id: '$_id' },
                     pipeline: [
                         {
                             $match: {

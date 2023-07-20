@@ -128,13 +128,13 @@ export const view_ps_record = async (req, res, next) => {
         if (records) {
             res.status(200).json(records.records);
         } else {
-            res.status(200).json({ });
+            res.status(200).json({});
         }
         console.log(records)
     } catch (error) {
         next(createError(error.status, error.message));
     }
-}
+};
 
 
 

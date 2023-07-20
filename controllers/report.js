@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Report from '../models/report.js';
+import PS from '../models/ps.js';
 import mongoose from 'mongoose';
 import { createError } from '../util/error.js';
 
@@ -42,6 +43,39 @@ export const take_report = async (req, res, next) => {
         );
         res.status(200).json(result);
 
+    } catch (error) {
+        next(createError(error.code, error.message));
+    }
+};
+
+export const getRecords = async (req, res, next) => {
+    try {
+        const recordsFilter = { status: { $eq: false } }; // Add filter condition for Product price
+
+        const result = await PS.aggregate([
+            {
+                $lookup: {
+                    from: 'Report', // The collection name to join with (case-sensitive)
+                    let: { _id: '$id' },
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: {
+                                    $and: [
+                                        { $eq: ['$ps_id', '$$id'] }, // Match Product _id with Order productId
+                                        recordsFilter, // Apply the Product filter condition for price
+                                    ],
+                                },
+                            },
+                        },
+                    ],
+                    as: 'records',
+                },
+            },
+            { $unwind: { path: '$records', preserveNullAndEmptyArrays: true } },
+
+            res.status(200).json(result);
+        ]);
     } catch (error) {
         next(createError(error.code, error.message));
     }

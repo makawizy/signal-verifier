@@ -50,33 +50,31 @@ export const take_report = async (req, res, next) => {
 
 export const getRecords = async (req, res, next) => {
     try {
-        const recordsFilter = { status: { $eq: false } }; // Add filter condition for Product price
-
         const result = await PS.aggregate([
             {
                 $lookup: {
-                    from: 'Report', // The collection name to join with (case-sensitive)
-                    let: { ps_id: '$_id' },
-                    pipeline: [
-                        {
-                            $match: {
-                                $expr: {
-                                    $and: [
-                                       
-                                        { $eq: ['$ps_id', '$$ps_id'] }, // Match Product _id with Order productId
-                                           recordsFilter, // Apply the Product filter condition for price
-                                    ],
-                                },
-                            },
-                        },
-                    ],
-                    as: 'records',
-                },
+                    from: 'reports',
+                    localField: 'id', // Field in "ps" collection to match
+                    foreignField: 'ps_id', // Field in "reports" collection to match
+                    as: 'reportData' // New field to store the joined data (you can use any name)
+                }
             },
-            { $unwind: { path: '$records', preserveNullAndEmptyArrays: true } },
-
-            
-        ]);
+            {
+                $unwind: '$reportData' // Unwind the "reportData" array to work with each joined document
+            },
+            {
+                $match: {
+                    'reportData.status': true // Filter the result where "status" in "reports" is true
+                }
+            },
+            {
+                $group: {
+                    _id: '$_id', // Group the result by "_id" to restore the original documents
+                    // Include any other fields you want to retain from the "ps" collection
+                    // For example: fieldName: { $first: '$fieldName' }
+                }
+            }
+        ])
         res.status(200).json(result);
 
     } catch (error) {

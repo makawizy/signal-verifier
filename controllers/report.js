@@ -51,32 +51,37 @@ export const take_report = async (req, res, next) => {
 export const getRecords = async (req, res, next) => {
     try {
         const { id } = req.params;
-                const result = await PS.aggregate([
-                    {
-                        $match: {
-                            _id: new mongoose.Types.ObjectId(id) // Match documents where "_id" is equal to the specified psId
-                        }
-                    },
-                    {
-                        $lookup: {
-                            from: 'reports',
-                            let: { psId: '$_id' },
-                            pipeline: [
-                                {
-                                    $match: {
-                                        $expr: {
-                                            $and: [
-                                                { $eq: ['$ps_id', '$$psId'] }, // Match "ps_id" in "reports" with "psId" from the outer collection
-                                                { status: true } // Filter documents where "status" in "reports" is true
+        const result = await PS.aggregate([
+            {
+                $match: {
+                    _id: mongoose.Types.ObjectId(id) // Match documents in "ps" collection where "_id" is equal to the specified id
+                }
+            },
+            {
+                $lookup: {
+                    from: 'reports',
+                    let: { psId: '$_id' },
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: {
+                                    $and: [
+                                        {
+                                            $eq: [
+                                                { $convert: { input: '$ps_id', to: 'objectId' } },
+                                                '$$psId'
                                             ]
-                                        }
-                                    }
+                                        }, // Match "ps_id" in "reports" with "psId" from the outer collection
+                                        { status: false } // Filter documents where "status" in "reports" is false
+                                    ]
                                 }
-                            ],
-                            as: 'reportData' // New field to store the joined data (you can use any name)
+                            }
                         }
-                    }
-                ]);
+                    ],
+                    as: 'reportData' // New field to store the joined data (you can use any name)
+                }
+            }
+        ]);
 
            
         console.log(result.title);

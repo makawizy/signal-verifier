@@ -51,27 +51,36 @@ export const take_report = async (req, res, next) => {
 export const getRecords = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const result = await PS.aggregate([
-            {
-                $lookup: {
-                    from: 'reports',
-                    localField: '_id', // Field in "ps" collection to match
-                    foreignField: 'ps_id', // Field in "reports" collection to match
-                    as: 'reportData' // New field to store the joined data (you can use any name)
-                }
-            },
-            {
-                $unwind: '$reportData' // Unwind the "reportData" array to work with each joined document
-            },
-            
-            {
-                $group: {
-                    _id: '$_id', // Group the result by "_id" to restore the original documents
-                    // Include any other fields you want to retain from the "ps" collection
-                    // For example: fieldName: { $first: '$fieldName' }
-                }
-            }
-        ]);
+                const result = await Ps.aggregate([
+                    {
+                        $match: {
+                            _id: mongoose.Types.ObjectId(id) // Match documents where "_id" is equal to the specified psId
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: 'reports',
+                            let: { psId: '$_id' },
+                            pipeline: [
+                                {
+                                    $match: {
+                                        $expr: {
+                                            $and: [
+                                                { $eq: ['$ps_id', '$$psId'] }, // Match "ps_id" in "reports" with "psId" from the outer collection
+                                                { status: true } // Filter documents where "status" in "reports" is true
+                                            ]
+                                        }
+                                    }
+                                }
+                            ],
+                            as: 'reportData' // New field to store the joined data (you can use any name)
+                        }
+                    }
+                ]);
+
+           
+       
+
         res.status(200).json(result);
 
     } catch (error) {

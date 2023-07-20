@@ -63,11 +63,7 @@ export const getRecords = async (req, res, next) => {
             {
                 $unwind: '$reportData' // Unwind the "reportData" array to work with each joined document
             },
-            {
-                $match: {
-                    'reportData.status': false,  // Filter the result where "status" in "reports" is true
-                }
-            },
+            
             {
                 $group: {
                     _id: '$_id', // Group the result by "_id" to restore the original documents

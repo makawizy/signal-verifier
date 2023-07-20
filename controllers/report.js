@@ -62,7 +62,7 @@ export const getRecords = async (req, res, next) => {
                             $match: {
                                 $expr: {
                                     $and: [
-                                        { $eq: ["6491a1cde9eb0004e79432ea", '$$id'] }, // Match Product _id with Order productId
+                                        { $eq: ["6491a1cde9eb0004e79432ea", '6491a1cde9eb0004e79432ea'] }, // Match Product _id with Order productId
                                         recordsFilter, // Apply the Product filter condition for price
                                     ],
                                 },

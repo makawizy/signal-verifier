@@ -8,7 +8,7 @@ import { createError } from '../util/error.js';
 export const cancel_existing_report = async (req, res, next) => {
     try {
         const { id: ps_id } = req.params;
-        const can = await Report.updateMany({ ps_id }, { $set: { status: true } });
+        const can = await Reports.updateMany({ ps_id }, { $set: { status: true } });
         res.status(200).send("success");
     } catch (error) {
         next(createError(error.code, error.message));
@@ -20,7 +20,7 @@ export const create_report = async (req, res, next) => {
         
         const today = new Date();
         const id = req.params.id;
-        const createReport = new Report({
+        const createReport = new Reports({
             venue: req.body.venue,
             ps_id : id,
             createdAt: today,
@@ -37,7 +37,7 @@ export const take_report = async (req, res, next) => {
 
         const { id: ps_id } = req.params;
         const updateReport = req.body;
-        const result = await Report.updateOne(
+        const result = await Reports.updateOne(
             { ps_id, status: false,}, // Replace with the appropriate document identifier
             { $set: { reports: updateReport, status : true, } } // Replace 'arrayField' with the name of your array field
         );

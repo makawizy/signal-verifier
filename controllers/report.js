@@ -74,8 +74,9 @@ export const getRecords = async (req, res, next) => {
             },
             { $unwind: { path: '$records', preserveNullAndEmptyArrays: true } },
 
-            res.status(200).json(result);
+            
         ]);
+        res.status(200).json(result);
     } catch (error) {
         next(createError(error.code, error.message));
     }

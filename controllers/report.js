@@ -74,7 +74,7 @@ export const getRecords = async (req, res, next) => {
                     // For example: fieldName: { $first: '$fieldName' }
                 }
             }
-        ]).exec();
+        ]);
         res.status(200).json(result);
 
     } catch (error) {

@@ -37,7 +37,7 @@ export const take_report = async (req, res, next) => {
         const { id: ps_id } = req.params;
         const updateReport = req.body;
         const result = await Report.updateOne(
-            { ps_id, status: true,}, // Replace with the appropriate document identifier
+            { ps_id, status: false,}, // Replace with the appropriate document identifier
             { $set: { reports: updateReport, status : true, } } // Replace 'arrayField' with the name of your array field
         );
         res.status(200).json(result);

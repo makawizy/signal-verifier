@@ -56,7 +56,7 @@ export const getRecords = async (req, res, next) => {
             {
                 $lookup: {
                     from: 'Report', // The collection name to join with (case-sensitive)
-                    let: { _id: '$id' },
+                    let: { id: '$_id' },
                     pipeline: [
                         {
                             $match: {
@@ -77,6 +77,7 @@ export const getRecords = async (req, res, next) => {
             
         ]);
         res.status(200).json(result);
+
     } catch (error) {
         next(createError(error.code, error.message));
     }

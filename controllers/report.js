@@ -87,7 +87,6 @@ export const load_reports_dropdown = async (req, res, next) => {
         if (reportData.length === 0) {
             return res.status(404).json({ error: 'No Report Created' });
         }
-        console.log(reportData.records);
         res.status(200).json(reportData);
 
     } catch (error) {

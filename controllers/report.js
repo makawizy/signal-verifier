@@ -74,3 +74,23 @@ export const getRecords = async (req, res, next) => {
         next(createError(error.code, error.message));
     }
 };
+
+export const load_reports_dropdown = async (req, res, next) => {
+
+    try {
+        const { id } = req.params;
+        // Find the "reports" documents with ps_id equal to the specified ID and status set to false
+        const reportData = await Reports.find({ ps_id: id });
+
+        // Add the "reportData" array to the "ps" document
+        //psDocument.reportData = reportData;
+        if (reportData.length === 0) {
+            return res.status(404).json({ error: 'No Report Created' });
+        }
+
+        res.status(200).json(reportData);
+
+    } catch (error) {
+        next(createError(error.code, error.message));
+    }
+};

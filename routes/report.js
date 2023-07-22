@@ -7,6 +7,6 @@ ROUTER.patch('/cancel/:id', cancel_existing_report);
 ROUTER.post('/create/:id', create_report);
 ROUTER.patch('/take_report/:id', take_report);
 ROUTER.get('/get_records/:id', getRecords);
-Router.get('/load_reports_dropdown/:id', load_reports_dropdown);
+ROUTER.get('/load_reports_dropdown/:id', load_reports_dropdown);
 
 export default ROUTER;
